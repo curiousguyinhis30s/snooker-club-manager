@@ -350,3 +350,19 @@
     background: white !important;
   }
 }
+
+/* Mobile Safe Area Support */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Bottom nav height + safe area */
+  .pb-nav-safe {
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+  }
+}

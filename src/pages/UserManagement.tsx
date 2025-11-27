@@ -163,12 +163,12 @@ export default function UserManagement({ currentUser }: UserManagementProps) {
   };
 
   return (
-    <div className="h-full bg-gray-50 p-6 overflow-y-auto" key={refreshKey}>
+    <div className="h-full bg-gray-50 p-3 lg:p-6 overflow-y-auto" key={refreshKey}>
       <div className="w-full max-w-full">
         <PageHeader
           title="User Management"
-          description={isSuperAdmin ? 'Manage club owners and employees' : 'Manage your employees and their permissions'}
-          icon={<Users className="w-6 h-6 text-blue-600" />}
+          description={isSuperAdmin ? 'Manage owners & employees' : 'Manage employees'}
+          icon={<Users className="w-4 h-4 lg:w-6 lg:h-6 text-blue-600" />}
           actions={
             <>
               {isSuperAdmin && (
@@ -180,8 +180,8 @@ export default function UserManagement({ currentUser }: UserManagementProps) {
                       setShowAddModal(true);
                     }}
                   >
-                    <UserPlus className="w-4 h-4 mr-2" />
-                    Add Owner
+                    <UserPlus className="w-3.5 h-3.5 lg:w-4 lg:h-4 lg:mr-1.5" />
+                    <span className="hidden lg:inline">Add</span> Owner
                   </Button>
                   <Button
                     variant="primary"
@@ -190,8 +190,8 @@ export default function UserManagement({ currentUser }: UserManagementProps) {
                       setShowAddModal(true);
                     }}
                   >
-                    <UserPlus className="w-4 h-4 mr-2" />
-                    Add Employee
+                    <UserPlus className="w-3.5 h-3.5 lg:w-4 lg:h-4 lg:mr-1.5" />
+                    <span className="hidden lg:inline">Add</span> Employee
                   </Button>
                 </>
               )}
@@ -203,8 +203,8 @@ export default function UserManagement({ currentUser }: UserManagementProps) {
                     setShowAddModal(true);
                   }}
                 >
-                  <UserPlus className="w-4 h-4 mr-2" />
-                  Add Employee
+                  <UserPlus className="w-3.5 h-3.5 lg:w-4 lg:h-4 lg:mr-1.5" />
+                  <span className="hidden lg:inline">Add</span> Employee
                 </Button>
               )}
             </>
@@ -249,73 +249,75 @@ export default function UserManagement({ currentUser }: UserManagementProps) {
             )}
 
             {allUsers.length === 0 ? (
-              <div className="text-center py-8">
-                <User className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-                <p className="text-sm text-gray-500">
+              <div className="text-center py-6 lg:py-8">
+                <User className="w-8 h-8 lg:w-10 lg:h-10 text-gray-300 mx-auto mb-2 lg:mb-3" />
+                <p className="text-xs lg:text-sm text-gray-500">
                   No users yet. Click "Add" to create one.
                 </p>
               </div>
             ) : (
-              <div className="space-y-2">
+              <div className="space-y-1.5 lg:space-y-2">
                 {allUsers.map((user) => (
                   <div
                     key={user.id}
-                    className={`flex items-center justify-between p-3 border rounded-lg transition-all ${
+                    className={`flex items-center justify-between p-2 lg:p-3 border rounded-lg transition-all ${
                       user.active
                         ? 'border-gray-200 bg-white'
                         : 'border-gray-200 bg-gray-50'
                     }`}
                   >
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
+                    <div className="flex items-center space-x-2 lg:space-x-3 min-w-0 flex-1">
+                      <div className={`w-7 h-7 lg:w-9 lg:h-9 rounded-md lg:rounded-lg flex items-center justify-center flex-shrink-0 ${
                         user.role === 'owner' ? 'bg-gray-100' : 'bg-slate-50'
                       }`}>
                         {user.role === 'owner' ? (
-                          <Shield className="w-4 h-4 text-gray-600" />
+                          <Shield className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-gray-600" />
                         ) : (
-                          <User className="w-4 h-4 text-slate-800" />
+                          <User className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-slate-800" />
                         )}
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h4 className="font-medium text-gray-900 text-sm">{user.name}</h4>
-                          <span className={`px-1.5 py-0.5 rounded text-xs font-medium ${
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5 lg:gap-2">
+                          <h4 className="font-medium text-gray-900 text-xs lg:text-sm truncate">{user.name}</h4>
+                          <span className={`px-1 lg:px-1.5 py-0.5 rounded text-[10px] lg:text-xs font-medium flex-shrink-0 ${
                             user.role === 'owner'
                               ? 'bg-gray-100 text-gray-600'
                               : 'bg-slate-50 text-slate-900'
                           }`}>
-                            {user.role === 'owner' ? 'Owner' : 'Employee'}
+                            {user.role === 'owner' ? 'Owner' : 'Emp'}
+                          </span>
+                          {/* Status dot for mobile, badge for desktop */}
+                          <span className={`lg:hidden w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                            user.active ? 'bg-green-500' : 'bg-gray-300'
+                          }`} />
+                          <span className={`hidden lg:inline px-2 py-0.5 rounded text-xs font-medium ${
+                            user.active
+                              ? 'bg-green-50 text-green-600'
+                              : 'bg-gray-100 text-gray-500'
+                          }`}>
+                            {user.active ? 'Active' : 'Inactive'}
                           </span>
                         </div>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-[10px] lg:text-xs text-gray-500 truncate">
                           {user.role === 'owner' ? user.username : user.employeeId}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      {/* Status Badge */}
-                      <div className={`px-2 py-0.5 rounded text-xs font-medium ${
-                        user.active
-                          ? 'bg-green-50 text-green-600'
-                          : 'bg-gray-100 text-gray-500'
-                      }`}>
-                        {user.active ? 'Active' : 'Inactive'}
-                      </div>
-
+                    <div className="flex items-center gap-1 lg:gap-2 flex-shrink-0 ml-2">
                       {((isOwner && user.role === 'employee') || (isSuperAdmin && (user.role === 'employee' || user.role === 'owner'))) && (
                         <>
                           <button
                             onClick={() => openResetPinModal(user)}
-                            className="p-1.5 bg-amber-50 hover:bg-amber-100 text-amber-600 rounded-md transition-all"
+                            className="p-1 lg:p-1.5 bg-amber-50 hover:bg-amber-100 text-amber-600 rounded transition-all"
                             title="Reset PIN"
                           >
-                            <KeyRound className="w-4 h-4" />
+                            <KeyRound className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                           </button>
 
                           <button
                             onClick={() => handleToggleStatus(user.id, user.active)}
-                            className={`p-1.5 rounded-md transition-all ${
+                            className={`p-1 lg:p-1.5 rounded transition-all ${
                               user.active
                                 ? 'bg-gray-100 hover:bg-gray-200 text-gray-600'
                                 : 'bg-green-50 hover:bg-green-100 text-green-600'
@@ -323,18 +325,18 @@ export default function UserManagement({ currentUser }: UserManagementProps) {
                             title={user.active ? 'Deactivate' : 'Activate'}
                           >
                             {user.active ? (
-                              <ToggleRight className="w-4 h-4" />
+                              <ToggleRight className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                             ) : (
-                              <ToggleLeft className="w-4 h-4" />
+                              <ToggleLeft className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                             )}
                           </button>
 
                           <button
                             onClick={() => handleDelete(user.id)}
-                            className="p-1.5 bg-gray-100 hover:bg-red-50 text-gray-500 hover:text-red-600 rounded-md transition-all"
+                            className="p-1 lg:p-1.5 bg-gray-100 hover:bg-red-50 text-gray-500 hover:text-red-600 rounded transition-all"
                             title={`Delete ${user.role === 'owner' ? 'Owner' : 'Employee'}`}
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
                           </button>
                         </>
                       )}

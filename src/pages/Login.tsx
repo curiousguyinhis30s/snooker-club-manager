@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { LogIn, User, Lock, Settings, ArrowLeft } from 'lucide-react';
 import { login } from '../lib/auth';
+import SnookerBallIcon from '../components/icons/SnookerBallIcon';
 
 interface LoginProps {
   onLogin: () => void;
@@ -63,7 +64,8 @@ export default function Login({ onLogin }: LoginProps) {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left Side - Animated Gradient with Grain */}
+      {/* ===================== DESKTOP LAYOUT ===================== */}
+      {/* Left Side - Animated Gradient with Grain (Desktop Only) */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
         {/* Animated Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 animate-gradient-shift" />
@@ -88,8 +90,8 @@ export default function Login({ onLogin }: LoginProps) {
         <div className="relative z-10 flex flex-col justify-between p-12 text-white">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center">
-                <span className="text-xl">🎱</span>
+              <div className="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center p-2">
+                <SnookerBallIcon className="w-full h-full" />
               </div>
               <span className="text-xl font-bold">Club Manager</span>
             </div>
@@ -123,17 +125,9 @@ export default function Login({ onLogin }: LoginProps) {
         </div>
       </div>
 
-      {/* Right Side - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-white">
+      {/* Desktop Right Side - Login Form */}
+      <div className="hidden lg:flex flex-1 items-center justify-center p-8 bg-white">
         <div className="w-full max-w-md">
-          {/* Mobile Logo */}
-          <div className="lg:hidden text-center mb-8">
-            <div className="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-3">
-              <span className="text-2xl">🎱</span>
-            </div>
-            <h2 className="text-xl font-bold text-slate-800">Club Manager</h2>
-          </div>
-
           {/* Header */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-slate-800 mb-2">
@@ -191,7 +185,7 @@ export default function Login({ onLogin }: LoginProps) {
                   onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
                   onKeyPress={handleKeyPress}
                   maxLength={6}
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:border-slate-800 focus:ring-4 focus:ring-slate-800/10 outline-none transition-all tracking-widest"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:border-slate-800 focus:ring-4 focus:ring-slate-800/10 outline-none tracking-widest"
                   placeholder="••••••"
                 />
               </div>
@@ -232,6 +226,113 @@ export default function Login({ onLogin }: LoginProps) {
           <p className="text-center text-xs text-slate-400 mt-8">
             Secure access • Encrypted connection
           </p>
+        </div>
+      </div>
+
+      {/* ===================== MOBILE LAYOUT ===================== */}
+      <div className="lg:hidden min-h-screen w-full bg-gray-50 flex flex-col">
+        {/* Minimal SuperAdmin Toggle - Top Right */}
+        {!showSuperAdmin && (
+          <button
+            onClick={() => setShowSuperAdmin(true)}
+            className="absolute top-4 right-4 z-20 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+            title="SuperAdmin Login"
+          >
+            <Settings className="w-4 h-4" />
+          </button>
+        )}
+
+        {/* Main Content - Centered */}
+        <div className="flex-1 flex items-center justify-center p-4">
+          <div className="w-full max-w-sm">
+            {/* Logo & Title */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-sm border border-gray-200 mb-4 p-3">
+                <SnookerBallIcon className="w-full h-full" />
+              </div>
+              <h1 className="text-xl font-bold text-gray-900">Club Manager</h1>
+              {showSuperAdmin && (
+                <p className="text-sm text-gray-500 mt-1">SuperAdmin Access</p>
+              )}
+            </div>
+
+            {/* Login Card */}
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+              {/* Back Button for SuperAdmin */}
+              {showSuperAdmin && (
+                <button
+                  onClick={() => setShowSuperAdmin(false)}
+                  className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 mb-4 -mt-1 transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back</span>
+                </button>
+              )}
+
+              {/* Form */}
+              <div className="space-y-4">
+                {/* Username */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    {showSuperAdmin ? 'Username' : 'Username / ID'}
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      autoFocus
+                      className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-gray-900 focus:ring-2 focus:ring-gray-900/5 outline-none transition-all"
+                      placeholder={showSuperAdmin ? 'superadmin' : 'Enter username'}
+                    />
+                  </div>
+                </div>
+
+                {/* PIN */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    PIN
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="password"
+                      value={pin}
+                      onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
+                      onKeyPress={handleKeyPress}
+                      maxLength={6}
+                      className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-gray-900 focus:ring-2 focus:ring-gray-900/5 outline-none tracking-[0.25em] transition-all"
+                      placeholder="••••••"
+                    />
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">6-digit PIN</p>
+                </div>
+
+                {/* Error */}
+                {error && (
+                  <div className="p-3 bg-red-50 border border-red-100 rounded-xl">
+                    <p className="text-sm text-red-600">{error}</p>
+                  </div>
+                )}
+
+                {/* Submit Button */}
+                <button
+                  onClick={handleLogin}
+                  className="w-full bg-gray-900 hover:bg-gray-800 active:scale-[0.98] text-white py-3 rounded-xl font-medium text-sm transition-all flex items-center justify-center gap-2"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Sign In
+                </button>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <p className="text-center text-xs text-gray-400 mt-6">
+              Secure access
+            </p>
+          </div>
         </div>
       </div>
 

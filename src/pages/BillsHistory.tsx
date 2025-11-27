@@ -80,34 +80,63 @@ export default function BillsHistory() {
   return (
     <div className="flex-1 flex flex-col h-screen bg-gray-50 overflow-hidden">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-5 py-3 flex-shrink-0">
-        <div className="flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-lg font-semibold text-gray-900">Bills History</h1>
-            <p className="text-xs text-gray-500">View and print past transactions</p>
+      <div className="bg-white border-b border-gray-200 flex-shrink-0">
+        {/* Mobile Header */}
+        <div className="lg:hidden px-4 py-3">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <Receipt className="w-5 h-5 text-gray-700" />
+              <h1 className="text-base font-semibold text-gray-900">Bills History</h1>
+            </div>
+            <span className="text-xs text-gray-500">{stats.count} bills</span>
           </div>
+          {/* Mobile Stats Row */}
+          <div className="flex items-center justify-center gap-6">
+            <div className="text-center">
+              <div className="text-lg font-bold text-gray-900">{formatCurrencyCompact(stats.total)}</div>
+              <div className="text-[10px] text-gray-500 uppercase">Total</div>
+            </div>
+            <div className="text-center">
+              <div className="text-sm font-semibold text-green-600">{formatCurrencyCompact(stats.cash)}</div>
+              <div className="text-[10px] text-gray-500 uppercase">Cash</div>
+            </div>
+            <div className="text-center">
+              <div className="text-sm font-semibold text-blue-600">{formatCurrencyCompact(stats.card)}</div>
+              <div className="text-[10px] text-gray-500 uppercase">Card</div>
+            </div>
+          </div>
+        </div>
 
-          {/* Stats - Inline */}
-          <div className="flex items-center gap-4 text-[13px]">
+        {/* Desktop Header */}
+        <div className="hidden lg:block px-5 py-3">
+          <div className="flex items-center justify-between gap-4">
             <div>
-              <span className="text-gray-500">Total</span>
-              <span className="ml-1.5 font-semibold text-gray-900">{formatCurrencyCompact(stats.total)}</span>
+              <h1 className="text-lg font-semibold text-gray-900">Bills History</h1>
+              <p className="text-xs text-gray-500">View and print past transactions</p>
             </div>
-            <div>
-              <span className="text-gray-500">Cash</span>
-              <span className="ml-1.5 font-medium text-gray-700">{formatCurrencyCompact(stats.cash)}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Card</span>
-              <span className="ml-1.5 font-medium text-gray-700">{formatCurrencyCompact(stats.card)}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Split</span>
-              <span className="ml-1.5 font-medium text-gray-700">{formatCurrencyCompact(stats.split)}</span>
-            </div>
-            <div>
-              <span className="text-gray-500">Count</span>
-              <span className="ml-1.5 font-medium text-gray-700">{stats.count}</span>
+
+            {/* Stats - Inline */}
+            <div className="flex items-center gap-4 text-[13px]">
+              <div>
+                <span className="text-gray-500">Total</span>
+                <span className="ml-1.5 font-semibold text-gray-900">{formatCurrencyCompact(stats.total)}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Cash</span>
+                <span className="ml-1.5 font-medium text-gray-700">{formatCurrencyCompact(stats.cash)}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Card</span>
+                <span className="ml-1.5 font-medium text-gray-700">{formatCurrencyCompact(stats.card)}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Split</span>
+                <span className="ml-1.5 font-medium text-gray-700">{formatCurrencyCompact(stats.split)}</span>
+              </div>
+              <div>
+                <span className="text-gray-500">Count</span>
+                <span className="ml-1.5 font-medium text-gray-700">{stats.count}</span>
+              </div>
             </div>
           </div>
         </div>

@@ -93,52 +93,52 @@ export default function GameCard({ table, onStart, onPause, onResume, onStop, on
   return (
     <div className={`bg-white rounded-xl border ${statusConfig.cardBorder} overflow-hidden transition-all duration-200`}>
       {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-100">
+      <div className="px-3 py-2 lg:px-4 lg:py-3 border-b border-gray-100">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center">
-              <span className="text-xl">{gameConfig.icon}</span>
+          <div className="flex items-center gap-2 lg:gap-3">
+            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-100 rounded-md flex items-center justify-center">
+              <span className="text-lg lg:text-xl">{gameConfig.icon}</span>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">{table.number}</h3>
-              <p className="text-xs text-gray-500">{gameConfig.label}</p>
+              <h3 className="font-semibold text-gray-900 text-sm lg:text-base">{table.number}</h3>
+              <p className="text-[10px] lg:text-xs text-gray-500">{gameConfig.label}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-1.5">
             <span className={`w-1.5 h-1.5 rounded-full ${statusConfig.dot}`}></span>
-            <span className={`text-xs font-medium ${statusConfig.color}`}>{statusConfig.text}</span>
+            <span className={`text-[10px] lg:text-xs font-medium ${statusConfig.color}`}>{statusConfig.text}</span>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <div className="p-3 lg:p-4">
         {table.session ? (
-          <div className="space-y-3">
+          <div className="space-y-2 lg:space-y-3">
             {/* Customer & Timer Row */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <div className="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-medium text-gray-600">
+                <div className="w-6 h-6 lg:w-7 lg:h-7 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] lg:text-xs font-medium text-gray-600">
                   {table.session.customerName.charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{table.session.customerName}</p>
+                  <p className="text-xs lg:text-sm font-medium text-gray-900 truncate">{table.session.customerName}</p>
                 </div>
               </div>
 
               <div className="text-right">
-                <span className="text-lg font-mono font-semibold text-gray-900 tabular-nums">
+                <span className="text-base lg:text-lg font-mono font-semibold text-gray-900 tabular-nums">
                   {formatTime(elapsed)}
                 </span>
               </div>
             </div>
 
             {/* Amount Display */}
-            <div className="bg-gray-50 rounded-md p-3">
+            <div className="bg-gray-50 rounded-md p-2 lg:p-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">Amount</span>
-                <span className="text-lg font-semibold text-gray-900" dir="auto">
+                <span className="text-xs lg:text-sm text-gray-500">Amount</span>
+                <span className="text-sm lg:text-lg font-semibold text-gray-900" dir="auto">
                   {formatCurrencyCompact(calculateAmount())}
                 </span>
               </div>
@@ -195,12 +195,12 @@ export default function GameCard({ table, onStart, onPause, onResume, onStop, on
             </div>
 
             {/* Action Buttons */}
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-1.5 lg:gap-2">
               <button
                 onClick={() => onAddFood(table.id)}
-                className="flex items-center justify-center gap-1 py-2 border border-gray-200 hover:bg-gray-50 rounded-lg text-sm font-medium text-gray-700 transition-colors"
+                className="flex items-center justify-center gap-1 py-1.5 lg:py-2 border border-gray-200 hover:bg-gray-50 rounded-md lg:rounded-lg text-xs lg:text-sm font-medium text-gray-700 transition-colors"
               >
-                <Coffee className="w-3.5 h-3.5" />
+                <Coffee className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
                 <span>F&B</span>
               </button>
 
@@ -208,55 +208,55 @@ export default function GameCard({ table, onStart, onPause, onResume, onStop, on
                 canResume ? (
                   <button
                     onClick={() => onResume(table.id)}
-                    className="flex items-center justify-center gap-1 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-sm font-medium transition-colors"
+                    className="flex items-center justify-center gap-1 py-1.5 lg:py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-md lg:rounded-lg text-xs lg:text-sm font-medium transition-colors"
                   >
-                    <Play className="w-3.5 h-3.5" />
+                    <Play className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
                     <span>Resume</span>
                   </button>
                 ) : (
                   <button
                     disabled
-                    className="flex items-center justify-center gap-1 py-2 bg-gray-100 text-gray-400 rounded-lg text-sm font-medium cursor-not-allowed"
+                    className="flex items-center justify-center gap-1 py-1.5 lg:py-2 bg-gray-100 text-gray-400 rounded-md lg:rounded-lg text-xs lg:text-sm font-medium cursor-not-allowed"
                   >
-                    <Lock className="w-3.5 h-3.5" />
+                    <Lock className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
                     <span>Locked</span>
                   </button>
                 )
               ) : (
                 <button
                   onClick={() => onPause(table.id)}
-                  className="flex items-center justify-center gap-1 py-2 border border-gray-200 hover:bg-gray-50 rounded-lg text-sm font-medium text-gray-700 transition-colors"
+                  className="flex items-center justify-center gap-1 py-1.5 lg:py-2 border border-gray-200 hover:bg-gray-50 rounded-md lg:rounded-lg text-xs lg:text-sm font-medium text-gray-700 transition-colors"
                 >
-                  <Pause className="w-3.5 h-3.5" />
+                  <Pause className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
                   <span>Pause</span>
                 </button>
               )}
 
               <button
                 onClick={handleEndSession}
-                className="flex items-center justify-center gap-1 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-sm font-medium transition-colors"
+                className="flex items-center justify-center gap-1 py-1.5 lg:py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-md lg:rounded-lg text-xs lg:text-sm font-medium transition-colors"
               >
-                <Square className="w-3.5 h-3.5" />
+                <Square className="w-3 h-3 lg:w-3.5 lg:h-3.5" />
                 <span>End</span>
               </button>
             </div>
           </div>
         ) : (
           /* Available State */
-          <div className="py-4">
+          <div className="py-2 lg:py-4">
             {table.status === 'maintenance' ? (
               <div className="text-center py-2">
-                <Wrench className="w-5 h-5 text-gray-400 mx-auto mb-1" />
-                <p className="text-sm text-gray-500">Under Maintenance</p>
+                <Wrench className="w-4 h-4 lg:w-5 lg:h-5 text-gray-400 mx-auto mb-1" />
+                <p className="text-xs lg:text-sm text-gray-500">Under Maintenance</p>
               </div>
             ) : (
               <button
                 onClick={() => onStart(table.id)}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-medium text-sm transition-colors shadow-sm"
+                className="w-full flex items-center justify-center gap-1.5 lg:gap-2 py-2 lg:py-3 bg-slate-800 hover:bg-slate-900 active:scale-[0.98] text-white rounded-md lg:rounded-lg font-medium text-xs lg:text-sm transition-all shadow-sm"
               >
-                <Play className="w-4 h-4" />
-                <span>Start Session</span>
-                <span className="text-slate-200 ml-1" dir="auto">
+                <Play className="w-3.5 h-3.5 lg:w-4 lg:h-4" />
+                <span>Start</span>
+                <span className="text-slate-300 text-[10px] lg:text-xs" dir="auto">
                   {formatRate(table.hourlyRate || 10)}
                 </span>
               </button>

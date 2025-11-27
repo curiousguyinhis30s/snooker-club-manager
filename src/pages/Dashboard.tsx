@@ -7,6 +7,7 @@ import FoodMenuModal from '../components/FoodMenuModal';
 import ExpenseModal from '../components/ExpenseModal';
 import SettingsHub from './SettingsHub';
 import { LoadingSkeleton, LoadingSpinner } from '../components/ui/LoadingSpinner';
+import SnookerBallIcon from '../components/icons/SnookerBallIcon';
 import { store } from '../lib/store';
 import type { Table, Session } from '../types';
 
@@ -133,8 +134,8 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center">
-                <span className="text-white text-sm font-bold">🎱</span>
+              <div className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center p-1.5">
+                <SnookerBallIcon className="w-full h-full" />
               </div>
               <div>
                 <h1 className="text-sm font-semibold text-gray-900">{settings.clubName}</h1>
@@ -229,7 +230,9 @@ export default function Dashboard() {
           <LoadingSkeleton count={6} type="card" />
         ) : tables.length === 0 ? (
           <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-            <div className="text-6xl mb-4">🎱</div>
+            <div className="w-16 h-16 mx-auto mb-4">
+              <SnookerBallIcon className="w-full h-full" />
+            </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No Tables Configured</h3>
             <p className="text-gray-500 mb-4">Configure tables in settings to start managing sessions</p>
             <button

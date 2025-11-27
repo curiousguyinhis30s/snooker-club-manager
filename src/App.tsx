@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
+import BottomNav from './components/BottomNav';
+import MobileHeader from './components/MobileHeader';
+import MobileSettingsMenu from './components/MobileSettingsMenu';
 import TablesView from './pages/TablesView';
 import Customers from './pages/Customers';
 import Expenses from './pages/Expenses';
@@ -22,7 +25,7 @@ import type { Table, User } from './types';
 
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(getCurrentUser());
-  const [showSetup, setShowSetup] = useState(false); // Changed: Don't auto-show setup, use login instead
+  const [showSetup, setShowSetup] = useState(false); // Always show login first - SuperAdmin creates owner
   const [settings, setSettings] = useState(store.getSettings());
   const [currentView, setCurrentView] = useState<string>(() => {
     // Default to first enabled activity
@@ -30,6 +33,7 @@ function App() {
     return enabledActivities.length > 0 ? `bookings-${enabledActivities[0].id}` : 'customers';
   });
   const [tables, setTables] = useState<Table[]>([]);
+  const [showMobileSettings, setShowMobileSettings] = useState(false);
 
   // Enable global keyboard shortcuts
   useGlobalShortcuts();
@@ -178,20 +182,69 @@ function App() {
     }
   };
 
+  // Handle mobile view change with settings menu logic
+  const handleMobileViewChange = (view: string) => {
+    if (view === 'settings-app' && !showMobileSettings) {
+      setShowMobileSettings(true);
+    } else {
+      setCurrentView(view);
+      setShowMobileSettings(false);
+    }
+  };
+
+  // Mobile settings menu (full screen on mobile)
+  if (showMobileSettings) {
+    return (
+      <div className="lg:hidden">
+        <MobileSettingsMenu
+          currentUser={currentUser}
+          currentView={currentView}
+          onViewChange={(view) => {
+            setCurrentView(view);
+            setShowMobileSettings(false);
+          }}
+          onLogout={handleLogout}
+          onBack={() => setShowMobileSettings(false)}
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex h-screen bg-slate-50">
-      <Sidebar
-        currentView={currentView}
-        onViewChange={setCurrentView}
-        clubName={settings.clubName}
-        settings={settings}
-        currentUser={currentUser}
-        onLogout={handleLogout}
-      />
-      <main className="flex-1 overflow-auto">
-        {renderView()}
-      </main>
-    </div>
+    <>
+      {/* Desktop Layout - unchanged */}
+      <div className="hidden lg:flex h-screen bg-slate-50">
+        <Sidebar
+          currentView={currentView}
+          onViewChange={setCurrentView}
+          clubName={settings.clubName}
+          settings={settings}
+          currentUser={currentUser}
+          onLogout={handleLogout}
+        />
+        <main className="flex-1 overflow-auto">
+          {renderView()}
+        </main>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden flex flex-col h-screen bg-slate-50">
+        <MobileHeader
+          clubName={settings.clubName}
+          currentUser={currentUser}
+          onLogout={handleLogout}
+        />
+        <main className="flex-1 overflow-auto pb-nav-safe">
+          {renderView()}
+        </main>
+        <BottomNav
+          currentView={currentView}
+          onViewChange={handleMobileViewChange}
+          settings={settings}
+          currentUser={currentUser}
+        />
+      </div>
+    </>
   );
 }
 

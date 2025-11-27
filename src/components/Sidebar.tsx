@@ -3,6 +3,7 @@ import { Calendar, Users, Settings, UtensilsCrossed, BarChart3, Database, Slider
 import { getEnabledActivities } from '../config/activities';
 import { useSidebar } from '../hooks/useSidebar';
 import type { Settings as SettingsType, User as UserType } from '../types';
+import SnookerBallIcon from './icons/SnookerBallIcon';
 
 interface SidebarProps {
   currentView: string;
@@ -74,8 +75,8 @@ export default function Sidebar({ currentView, onViewChange, clubName, settings,
       {/* Header */}
       <div className="p-3 border-b border-gray-200">
         <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-2.5'}`}>
-          <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-sm flex-shrink-0">
-            🎱
+          <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center flex-shrink-0 p-1.5">
+            <SnookerBallIcon className="w-full h-full" />
           </div>
           {!isCollapsed && (
             <div className="min-w-0 flex-1">

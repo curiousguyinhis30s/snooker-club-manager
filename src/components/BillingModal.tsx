@@ -8,6 +8,7 @@ import { getCurrentUser } from '../lib/auth';
 import { store } from '../lib/store';
 import ReceiptTemplate from './ReceiptTemplate';
 import BillSuccess from './BillSuccess';
+import SnookerBallIcon from './icons/SnookerBallIcon';
 import { addMoney, subtractMoney, multiplyMoney, percentageOf, sumMoney, roundMoney, moneyEquals } from '../lib/moneyUtils';
 import { validatePercentage, validateDiscountAmount, validateNonNegativeNumber } from '../lib/validation';
 
@@ -270,8 +271,8 @@ export default function BillingModal({ session, tableNumber, onClose, onConfirm,
         <div className="bg-slate-800 px-5 py-3 flex-shrink-0">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
-                <span className="text-base">🎱</span>
+              <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center p-1.5">
+                <SnookerBallIcon className="w-full h-full" />
               </div>
               <div>
                 <h3 className="text-[15px] font-semibold text-white">Session Bill</h3>
