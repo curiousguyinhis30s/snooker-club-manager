@@ -158,7 +158,7 @@ export default function FnBManagement({ menuItems, bundles = [], onSaveMenuItems
             <p className="text-[10px] text-gray-500">Manage food & beverage menu</p>
           </div>
         </div>
-        <button onClick={handleSaveAll} className="px-2.5 py-1 text-[10px] bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 shadow-sm flex items-center gap-1">
+        <button onClick={handleSaveAll} className="px-2.5 py-1 text-[10px] bg-slate-800 text-white rounded-lg hover:bg-slate-900 shadow-sm flex items-center gap-1">
           <Save className="w-3 h-3" /> Save Menu
         </button>
       </div>
@@ -190,7 +190,7 @@ export default function FnBManagement({ menuItems, bundles = [], onSaveMenuItems
               <option key={cat.id} value={cat.id}>{cat.icon} {cat.label}</option>
             ))}
           </select>
-          <button onClick={handleAddItem} className="px-2 py-1.5 text-xs bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 shadow-sm">
+          <button onClick={handleAddItem} className="px-2 py-1.5 text-xs bg-slate-800 text-white rounded-lg hover:bg-slate-900 shadow-sm">
             <Plus className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -231,7 +231,7 @@ export default function FnBManagement({ menuItems, bundles = [], onSaveMenuItems
                 </div>
               ))}
               <div className="flex gap-2">
-                <button onClick={handleAddBundle} className="flex-1 px-2 py-1 text-xs bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 shadow-sm">Create</button>
+                <button onClick={handleAddBundle} className="flex-1 px-2 py-1 text-xs bg-slate-800 text-white rounded-lg hover:bg-slate-900 shadow-sm">Create</button>
                 <button onClick={() => setShowBundleForm(false)} className="px-2 py-1 text-xs border border-gray-200 rounded text-gray-600 hover:bg-gray-50">Cancel</button>
               </div>
             </div>

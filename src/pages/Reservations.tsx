@@ -206,7 +206,7 @@ export default function Reservations({ settings }: ReservationsProps) {
                   setEditingReservation(null);
                   setShowModal(true);
                 }}
-                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white shadow-sm rounded-lg font-medium text-sm transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white shadow-sm rounded-lg font-medium text-sm transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 New Reservation
@@ -250,7 +250,7 @@ export default function Reservations({ settings }: ReservationsProps) {
             action={
               <button
                 onClick={() => setShowModal(true)}
-                className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white shadow-sm rounded-lg text-sm font-medium transition-colors"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white shadow-sm rounded-lg text-sm font-medium transition-colors"
               >
                 Create Reservation
               </button>
@@ -640,7 +640,7 @@ function ReservationModal({ activities, reservation, selectedDate, onClose, onSa
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white shadow-sm rounded-lg font-medium text-sm transition-colors"
+              className="flex-1 px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white shadow-sm rounded-lg font-medium text-sm transition-colors"
             >
               {reservation ? 'Update Reservation' : 'Create Reservation'}
             </button>

@@ -88,7 +88,7 @@ export default function AddActivityDialog({ onClose, onAdd, existingActivities }
                   type="button"
                   onClick={() => setIcon(emoji)}
                   className={`text-2xl p-2 rounded-lg hover:bg-gray-100 transition-colors ${
-                    icon === emoji ? 'bg-indigo-100 ring-2 ring-indigo-500' : ''
+                    icon === emoji ? 'bg-slate-100 ring-2 ring-slate-500' : ''
                   }`}
                 >
                   {emoji}
@@ -196,7 +196,7 @@ export default function AddActivityDialog({ onClose, onAdd, existingActivities }
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white rounded-lg transition-colors shadow-sm flex items-center justify-center space-x-2"
+              className="flex-1 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg transition-colors shadow-sm flex items-center justify-center space-x-2"
             >
               <Plus className="w-4 h-4" />
               <span>Add Activity</span>

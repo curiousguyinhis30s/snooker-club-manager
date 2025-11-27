@@ -153,7 +153,7 @@ export default function CustomerManagement({ settings, onUpdateSettings }: Custo
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors shadow-sm"
+          className="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors shadow-sm"
         >
           <UserPlus className="w-5 h-5" />
           <span>Add Customer</span>
@@ -164,8 +164,8 @@ export default function CustomerManagement({ settings, onUpdateSettings }: Custo
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-              <Award className="w-6 h-6 text-indigo-600" />
+            <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+              <Award className="w-6 h-6 text-slate-600" />
             </div>
             <div>
               <p className="text-sm text-gray-600">Total Customers</p>
@@ -188,8 +188,8 @@ export default function CustomerManagement({ settings, onUpdateSettings }: Custo
 
         <div className="bg-white rounded-xl border border-gray-200 p-6">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-indigo-600" />
+            <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
+              <TrendingUp className="w-6 h-6 text-slate-600" />
             </div>
             <div>
               <p className="text-sm text-gray-600">Avg per Customer</p>
@@ -285,7 +285,7 @@ export default function CustomerManagement({ settings, onUpdateSettings }: Custo
                       <span className="text-sm text-gray-900">{formatCurrency(customer.avgSessionValue)}</span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">
+                      <span className="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full">
                         {customer.favoriteActivity}
                       </span>
                     </td>
@@ -296,7 +296,7 @@ export default function CustomerManagement({ settings, onUpdateSettings }: Custo
                       <div className="flex items-center justify-end space-x-2">
                         <button
                           onClick={() => handleViewDetails(customer)}
-                          className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                          className="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors"
                           title="View Details"
                         >
                           <Edit2 className="w-4 h-4" />
@@ -388,7 +388,7 @@ export default function CustomerManagement({ settings, onUpdateSettings }: Custo
               </button>
               <button
                 onClick={handleAddCustomer}
-                className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white rounded-lg transition-colors shadow-sm"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg transition-colors shadow-sm"
               >
                 Add Customer
               </button>
@@ -417,9 +417,9 @@ export default function CustomerManagement({ settings, onUpdateSettings }: Custo
             <div className="p-6">
               {/* Customer Info */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-indigo-50 rounded-lg p-4">
+                <div className="bg-slate-50 rounded-lg p-4">
                   <div className="flex items-center space-x-2 mb-2">
-                    <DollarSign className="w-5 h-5 text-indigo-600" />
+                    <DollarSign className="w-5 h-5 text-slate-600" />
                     <p className="text-sm font-medium text-gray-700">Total Spent</p>
                   </div>
                   <p className="text-2xl font-bold text-gray-900">{formatCurrency(selectedCustomer.totalSpent)}</p>

@@ -51,8 +51,7 @@ export default function SettingsHub({
           <FnBManagement
             menuItems={settings.menuItems}
             bundles={settings.bundles}
-            currency={settings.currency}
-            onSave={onSaveMenuItems}
+            onSaveMenuItems={onSaveMenuItems}
             onSaveBundles={onSaveBundles}
           />
         );
@@ -101,16 +100,16 @@ export default function SettingsHub({
                 onClick={() => setActiveSection(section.id)}
                 className={`w-full flex items-center space-x-2 px-2 py-2 rounded-lg transition-all duration-200 ${
                   isActive
-                    ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                    ? 'bg-slate-100 text-slate-900 border border-slate-300'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               >
-                <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-blue-600' : 'text-gray-400'}`} />
+                <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-slate-700' : 'text-gray-400'}`} />
                 <div className="flex-1 text-left min-w-0">
-                  <div className={`font-medium text-xs ${isActive ? 'text-blue-700' : 'text-gray-700'}`}>
+                  <div className={`font-medium text-xs ${isActive ? 'text-slate-900' : 'text-gray-700'}`}>
                     {section.label}
                   </div>
-                  <div className={`text-xs ${isActive ? 'text-blue-600' : 'text-gray-500'} truncate`}>
+                  <div className={`text-xs ${isActive ? 'text-slate-600' : 'text-gray-500'} truncate`}>
                     {section.description}
                   </div>
                 </div>

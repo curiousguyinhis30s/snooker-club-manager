@@ -90,7 +90,7 @@ export default function AppSettings({ settings, onSave, userRole }: AppSettingsP
             className={`px-3 py-1.5 text-xs font-medium rounded-md flex items-center gap-1.5 transition-all ${
               isSaving
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white shadow-sm'
+                : 'bg-slate-800 hover:bg-slate-900 text-white shadow-sm'
             }`}
           >
             <Save className="w-3.5 h-3.5" />

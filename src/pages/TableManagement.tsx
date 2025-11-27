@@ -69,7 +69,7 @@ export default function TableManagement({ settings, onSave }: TableManagementPro
           </div>
           <button
             onClick={() => setShowAddDialog(true)}
-            className="flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
+            className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Add Activity</span>
@@ -174,7 +174,7 @@ export default function TableManagement({ settings, onSave }: TableManagementPro
           </p>
           <button
             onClick={() => setShowAddDialog(true)}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white px-6 py-3 rounded-lg transition-colors shadow-sm"
+            className="inline-flex items-center space-x-2 bg-slate-800 hover:bg-slate-900 text-white px-6 py-3 rounded-lg transition-colors shadow-sm"
           >
             <Plus className="w-5 h-5" />
             <span>Add Your First Activity</span>

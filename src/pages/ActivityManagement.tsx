@@ -192,7 +192,7 @@ export default function ActivityManagement({ settings, onSave }: ActivityManagem
         </div>
         <button
           onClick={() => { resetForm(); setEditingId(null); setShowAddModal(true); }}
-          className="px-2.5 py-1 text-[10px] bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 shadow-sm flex items-center gap-1"
+          className="px-2.5 py-1 text-[10px] bg-slate-800 hover:bg-slate-900 text-white rounded-lg shadow-sm flex items-center gap-1"
         >
           <Plus className="w-3 h-3" /> Add Activity
         </button>
@@ -222,7 +222,7 @@ export default function ActivityManagement({ settings, onSave }: ActivityManagem
             <p className="text-gray-500 text-sm mb-3">No activities yet</p>
             <button
               onClick={() => { resetForm(); setEditingId(null); setShowAddModal(true); }}
-              className="px-3 py-1.5 text-xs bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 shadow-sm"
+              className="px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-900 text-white rounded-lg shadow-sm"
             >
               <Plus className="w-3 h-3 inline mr-1" /> Create Activity
             </button>
@@ -334,7 +334,7 @@ export default function ActivityManagement({ settings, onSave }: ActivityManagem
                 </button>
                 <button
                   onClick={editingId ? handleUpdate : handleAdd}
-                  className="flex-1 px-3 py-1.5 text-xs bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:from-indigo-600 hover:to-indigo-700 shadow-sm"
+                  className="flex-1 px-3 py-1.5 text-xs bg-slate-800 hover:bg-slate-900 text-white rounded-lg shadow-sm"
                 >
                   {editingId ? 'Update' : 'Create'}
                 </button>

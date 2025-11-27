@@ -55,7 +55,7 @@ export default function OwnerSetup({ onComplete }: OwnerSetupProps) {
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-4xl">👑</span>
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Owner Account</h1>
@@ -63,8 +63,8 @@ export default function OwnerSetup({ onComplete }: OwnerSetupProps) {
         </div>
 
         {/* Welcome Message */}
-        <div className="mb-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
-          <p className="text-sm text-indigo-800">
+        <div className="mb-6 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+          <p className="text-sm text-slate-800">
             <strong>Welcome!</strong> Create your owner account to manage your club. You'll have full access to all features.
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function OwnerSetup({ onComplete }: OwnerSetupProps) {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
               placeholder="Enter your full name"
             />
           </div>
@@ -97,7 +97,7 @@ export default function OwnerSetup({ onComplete }: OwnerSetupProps) {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
               placeholder="Choose a username"
             />
           </div>
@@ -116,7 +116,7 @@ export default function OwnerSetup({ onComplete }: OwnerSetupProps) {
               value={pin}
               onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
               maxLength={6}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
               placeholder="••••••"
             />
           </div>
@@ -135,7 +135,7 @@ export default function OwnerSetup({ onComplete }: OwnerSetupProps) {
               value={confirmPin}
               onChange={(e) => setConfirmPin(e.target.value.replace(/\D/g, ''))}
               maxLength={6}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
               placeholder="••••••"
             />
           </div>
@@ -151,7 +151,7 @@ export default function OwnerSetup({ onComplete }: OwnerSetupProps) {
         {/* Create Account Button */}
         <button
           onClick={handleSetup}
-          className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+          className="w-full bg-slate-800 hover:bg-slate-900 text-white py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
         >
           <CheckCircle className="w-5 h-5" />
           <span>Create Owner Account</span>

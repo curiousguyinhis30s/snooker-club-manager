@@ -425,7 +425,7 @@ export default function UserManagement({ currentUser }: UserManagementProps) {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white shadow-sm rounded-md font-medium text-sm transition-all shadow-sm"
+                  className="flex-1 px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white shadow-sm rounded-md font-medium text-sm transition-all shadow-sm"
                 >
                   Create
                 </button>

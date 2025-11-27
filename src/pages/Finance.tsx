@@ -121,7 +121,7 @@ export default function Finance({ userRole = 'employee' }: FinanceProps) {
             </span>
           </div>
         ) : (
-          <div className="flex items-center space-x-2 text-indigo-600 bg-indigo-50 px-4 py-2 rounded-lg">
+          <div className="flex items-center space-x-2 text-slate-700 bg-slate-50 px-4 py-2 rounded-lg">
             <Unlock className="w-5 h-5" />
             <span className="font-medium">Day Open - {summary.totalSessions} sessions</span>
           </div>
@@ -193,9 +193,9 @@ export default function Finance({ userRole = 'employee' }: FinanceProps) {
             )}
           </div>
 
-          <div className="bg-indigo-50 rounded-lg p-4">
+          <div className="bg-blue-50 rounded-lg p-4">
             <p className="text-sm text-gray-600 mb-1">Card</p>
-            <p className="text-xl font-bold text-indigo-700">
+            <p className="text-xl font-bold text-blue-700">
               {formatCurrencyCompact(isClosed ? closure!.actualCard : summary.expectedCard)}
             </p>
             {isClosed && closure!.cardVariance !== 0 && (

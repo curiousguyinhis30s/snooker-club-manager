@@ -211,7 +211,7 @@ export default function Settings({ onClose }: SettingsProps) {
               </select>
               <button
                 onClick={handleAddMenuItem}
-                className="flex items-center justify-center space-x-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
+                className="flex items-center justify-center space-x-2 bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add</span>

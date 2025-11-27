@@ -208,7 +208,7 @@ export default function Login({ onLogin }: LoginProps) {
             {/* Login Button */}
             <button
               onClick={handleLogin}
-              className="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white shadow-sm py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 shadow-lg shadow-slate-800/20"
+              className="w-full bg-slate-800 hover:bg-slate-900 text-white py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 shadow-lg shadow-slate-800/20"
             >
               <LogIn className="w-5 h-5" />
               Sign In

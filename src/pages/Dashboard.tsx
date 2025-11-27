@@ -184,12 +184,12 @@ export default function Dashboard() {
                 <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wide">In Session</p>
                 <p className="text-2xl font-semibold text-gray-900 mt-0.5">{stats.occupied}</p>
               </div>
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-indigo-600" />
+              <div className="w-10 h-10 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 text-slate-600" />
               </div>
             </div>
             <div className="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
-              <div className="h-full bg-indigo-500 rounded-full" style={{ width: `${(stats.occupied / tables.length) * 100}%` }} />
+              <div className="h-full bg-slate-600 rounded-full" style={{ width: `${(stats.occupied / tables.length) * 100}%` }} />
             </div>
           </div>
 
