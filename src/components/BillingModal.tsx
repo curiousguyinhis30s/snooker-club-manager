@@ -265,8 +265,8 @@ export default function BillingModal({ session, tableNumber, onClose, onConfirm,
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end lg:items-center justify-center z-50 animate-fade-in">
-      <div className="bg-white rounded-t-2xl lg:rounded-xl shadow-2xl w-full lg:max-w-3xl max-h-[90vh] lg:max-h-[85vh] lg:mx-4 flex flex-col animate-scale-in overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center z-50 animate-fade-in">
+      <div className="bg-white rounded-t-2xl md:rounded-xl shadow-2xl w-full md:max-w-3xl max-h-[85vh] md:max-h-[85vh] md:mx-4 flex flex-col animate-scale-in overflow-hidden">
         {/* Header */}
         <div className="bg-slate-800 px-4 lg:px-5 py-3 flex-shrink-0">
           <div className="flex justify-between items-center">
@@ -288,10 +288,10 @@ export default function BillingModal({ session, tableNumber, onClose, onConfirm,
           </div>
         </div>
 
-        {/* Main Content - Single column on mobile, 2 columns on desktop */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        {/* Main Content - Single column on mobile, 2 columns on tablet+ */}
+        <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
           {/* Left Column - Bill Details */}
-          <div className="flex-1 p-3 lg:p-4 overflow-y-auto lg:border-r border-gray-100">
+          <div className="flex-1 p-3 md:p-4 overflow-y-auto md:border-r border-gray-100">
             {/* Session Info */}
             <div className="flex items-center justify-between p-2.5 bg-slate-50 rounded-lg mb-3">
               <div className="flex items-center gap-2.5">
@@ -400,7 +400,7 @@ export default function BillingModal({ session, tableNumber, onClose, onConfirm,
           </div>
 
           {/* Right Column - Payment */}
-          <div className="w-full lg:w-72 p-3 lg:p-4 bg-slate-50 flex flex-col flex-shrink-0 border-t lg:border-t-0 border-gray-200">
+          <div className="w-full md:w-72 p-3 md:p-4 bg-slate-50 flex flex-col flex-shrink-0 border-t md:border-t-0 border-gray-200">
             {/* Payment Method */}
             <div className="mb-3">
               <p className="text-[11px] font-medium text-slate-500 uppercase mb-1.5">Payment Method</p>
@@ -514,12 +514,12 @@ export default function BillingModal({ session, tableNumber, onClose, onConfirm,
               </div>
             )}
 
-            {/* Confirm Button - with safe area padding on mobile */}
-            <div className="mt-3 pb-safe">
+            {/* Confirm Button - with bottom nav + safe area padding on mobile */}
+            <div className="mt-3 pb-20 md:pb-0">
               <button
                 onClick={handleConfirmPayment}
                 disabled={isProcessing}
-                className={`w-full py-3 lg:py-2.5 rounded-lg text-sm lg:text-[13px] font-medium text-white transition-all flex items-center justify-center gap-2 ${
+                className={`w-full py-3 md:py-2.5 rounded-lg text-sm md:text-[13px] font-medium text-white transition-all flex items-center justify-center gap-2 ${
                   isProcessing
                     ? 'bg-slate-400 cursor-not-allowed'
                     : 'bg-slate-900 hover:bg-neutral-950 shadow-md shadow-slate-900/20 active:scale-[0.98]'
