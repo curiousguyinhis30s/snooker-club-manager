@@ -1,35 +1,23 @@
-import { useState, useEffect } from 'react';
-import { LogIn, User, Lock, ArrowLeft, Eye } from 'lucide-react';
+import { useState } from 'react';
+import { LogIn, User, Lock, Settings, ArrowLeft } from 'lucide-react';
 import { login } from '../lib/auth';
 import SnookerBallIcon from '../components/icons/SnookerBallIcon';
-import { initializeDemoData } from '../lib/demoData';
 
 interface LoginProps {
   onLogin: () => void;
 }
 
-// Demo credentials - visible to users
-const DEMO_CREDENTIALS = {
-  username: 'superadmin',
-  pin: '999999'
-};
-
 export default function Login({ onLogin }: LoginProps) {
+  const [showSuperAdmin, setShowSuperAdmin] = useState(false);
   const [username, setUsername] = useState('');
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
-  const [showPin, setShowPin] = useState(false);
-
-  // Initialize demo data on first load
-  useEffect(() => {
-    initializeDemoData();
-  }, []);
 
   const handleLogin = () => {
     setError('');
 
     if (!username || !pin) {
-      setError('Please enter both username and PIN');
+      setError('Please enter both username/ID and PIN');
       return;
     }
 
@@ -38,33 +26,34 @@ export default function Login({ onLogin }: LoginProps) {
       return;
     }
 
-    // Try superadmin first
-    const superadminAttempt = login(username, pin, 'superadmin');
-    if (superadminAttempt) {
-      onLogin();
+    let role: 'owner' | 'employee' | 'superadmin';
+
+    if (showSuperAdmin) {
+      role = 'superadmin';
+    } else {
+      const ownerAttempt = login(username, pin, 'owner');
+      if (ownerAttempt) {
+        onLogin();
+        return;
+      }
+
+      const employeeAttempt = login(username, pin, 'employee');
+      if (employeeAttempt) {
+        onLogin();
+        return;
+      }
+
+      setError('Invalid credentials. Please try again.');
       return;
     }
 
-    // Try owner
-    const ownerAttempt = login(username, pin, 'owner');
-    if (ownerAttempt) {
+    const user = login(username, pin, role);
+
+    if (user) {
       onLogin();
-      return;
+    } else {
+      setError('Invalid credentials. Please try again.');
     }
-
-    // Try employee
-    const employeeAttempt = login(username, pin, 'employee');
-    if (employeeAttempt) {
-      onLogin();
-      return;
-    }
-
-    setError('Invalid credentials. Please try again.');
-  };
-
-  const fillDemoCredentials = () => {
-    setUsername(DEMO_CREDENTIALS.username);
-    setPin(DEMO_CREDENTIALS.pin);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -105,7 +94,6 @@ export default function Login({ onLogin }: LoginProps) {
                 <SnookerBallIcon className="w-full h-full" />
               </div>
               <span className="text-xl font-bold">Club Manager</span>
-              <span className="px-2 py-0.5 bg-amber-500 text-amber-950 text-xs font-bold rounded-full">DEMO</span>
             </div>
           </div>
 
@@ -140,46 +128,35 @@ export default function Login({ onLogin }: LoginProps) {
       {/* Desktop Right Side - Login Form */}
       <div className="hidden lg:flex flex-1 items-center justify-center p-8 bg-white">
         <div className="w-full max-w-md">
-          {/* Demo Credentials Box */}
-          <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-            <div className="flex items-center gap-2 mb-2">
-              <Eye className="w-4 h-4 text-amber-600" />
-              <span className="text-sm font-semibold text-amber-800">Demo Credentials</span>
-            </div>
-            <div className="flex items-center gap-4 text-sm">
-              <div>
-                <span className="text-amber-700">Username:</span>
-                <code className="ml-1 px-1.5 py-0.5 bg-amber-100 rounded text-amber-900 font-mono">{DEMO_CREDENTIALS.username}</code>
-              </div>
-              <div>
-                <span className="text-amber-700">PIN:</span>
-                <code className="ml-1 px-1.5 py-0.5 bg-amber-100 rounded text-amber-900 font-mono">{DEMO_CREDENTIALS.pin}</code>
-              </div>
-            </div>
-            <button
-              onClick={fillDemoCredentials}
-              className="mt-3 text-xs text-amber-700 hover:text-amber-900 underline"
-            >
-              Click to auto-fill credentials
-            </button>
-          </div>
-
           {/* Header */}
-          <div className="mb-6">
+          <div className="mb-8">
             <h2 className="text-2xl font-bold text-slate-800 mb-2">
-              Welcome to the Demo
+              {showSuperAdmin ? 'SuperAdmin Access' : 'Welcome back'}
             </h2>
             <p className="text-slate-500">
-              Explore all features with pre-loaded sample data
+              {showSuperAdmin
+                ? 'Enter your admin credentials to continue'
+                : 'Sign in to access your club dashboard'}
             </p>
           </div>
+
+          {/* SuperAdmin Mode Toggle */}
+          {showSuperAdmin && (
+            <button
+              onClick={() => setShowSuperAdmin(false)}
+              className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to staff login
+            </button>
+          )}
 
           {/* Login Form */}
           <div className="space-y-5">
             {/* Username Input */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
-                Username
+                {showSuperAdmin ? 'Admin Username' : 'Username or Employee ID'}
               </label>
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -190,7 +167,7 @@ export default function Login({ onLogin }: LoginProps) {
                   onKeyPress={handleKeyPress}
                   autoFocus
                   className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:border-slate-800 focus:ring-4 focus:ring-slate-800/10 outline-none transition-all"
-                  placeholder="superadmin"
+                  placeholder={showSuperAdmin ? 'superadmin' : 'Enter your username'}
                 />
               </div>
             </div>
@@ -203,21 +180,14 @@ export default function Login({ onLogin }: LoginProps) {
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input
-                  type={showPin ? 'text' : 'password'}
+                  type="password"
                   value={pin}
                   onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
                   onKeyPress={handleKeyPress}
                   maxLength={6}
-                  className="w-full pl-12 pr-12 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:border-slate-800 focus:ring-4 focus:ring-slate-800/10 outline-none tracking-widest"
-                  placeholder="999999"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:border-slate-800 focus:ring-4 focus:ring-slate-800/10 outline-none tracking-widest"
+                  placeholder="••••••"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPin(!showPin)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                >
-                  <Eye className="w-5 h-5" />
-                </button>
               </div>
               <p className="text-xs text-slate-400 mt-2">Enter your 6-digit PIN</p>
             </div>
@@ -239,60 +209,72 @@ export default function Login({ onLogin }: LoginProps) {
             </button>
           </div>
 
+          {/* SuperAdmin Toggle */}
+          {!showSuperAdmin && (
+            <div className="mt-8 pt-6 border-t border-slate-100">
+              <button
+                onClick={() => setShowSuperAdmin(true)}
+                className="w-full flex items-center justify-center gap-2 py-3 text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-xl transition-all"
+              >
+                <Settings className="w-4 h-4" />
+                <span className="text-sm">SuperAdmin Login</span>
+              </button>
+            </div>
+          )}
+
           {/* Footer */}
           <p className="text-center text-xs text-slate-400 mt-8">
-            This is a demo version with sample data
+            Secure access • Encrypted connection
           </p>
         </div>
       </div>
 
       {/* ===================== MOBILE LAYOUT ===================== */}
       <div className="lg:hidden min-h-screen w-full bg-gray-50 flex flex-col">
-        {/* Demo Badge - Top Right */}
-        <div className="absolute top-4 right-4 z-20 px-2 py-1 bg-amber-500 text-amber-950 text-xs font-bold rounded-full">
-          DEMO
-        </div>
+        {/* Minimal SuperAdmin Toggle - Top Right */}
+        {!showSuperAdmin && (
+          <button
+            onClick={() => setShowSuperAdmin(true)}
+            className="absolute top-4 right-4 z-20 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+            title="SuperAdmin Login"
+          >
+            <Settings className="w-4 h-4" />
+          </button>
+        )}
 
         {/* Main Content - Centered */}
         <div className="flex-1 flex items-center justify-center p-4">
           <div className="w-full max-w-sm">
             {/* Logo & Title */}
-            <div className="text-center mb-6">
+            <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-sm border border-gray-200 mb-4 p-3">
                 <SnookerBallIcon className="w-full h-full" />
               </div>
               <h1 className="text-xl font-bold text-gray-900">Club Manager</h1>
-              <p className="text-sm text-gray-500 mt-1">Demo Version</p>
-            </div>
-
-            {/* Demo Credentials Card */}
-            <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-xl">
-              <div className="flex items-center justify-between">
-                <div className="text-xs">
-                  <span className="text-amber-700">User:</span>
-                  <code className="ml-1 text-amber-900 font-mono font-bold">{DEMO_CREDENTIALS.username}</code>
-                </div>
-                <div className="text-xs">
-                  <span className="text-amber-700">PIN:</span>
-                  <code className="ml-1 text-amber-900 font-mono font-bold">{DEMO_CREDENTIALS.pin}</code>
-                </div>
-              </div>
-              <button
-                onClick={fillDemoCredentials}
-                className="w-full mt-2 py-1.5 text-xs text-amber-800 bg-amber-100 hover:bg-amber-200 rounded-lg font-medium transition-colors"
-              >
-                Tap to auto-fill
-              </button>
+              {showSuperAdmin && (
+                <p className="text-sm text-gray-500 mt-1">SuperAdmin Access</p>
+              )}
             </div>
 
             {/* Login Card */}
             <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+              {/* Back Button for SuperAdmin */}
+              {showSuperAdmin && (
+                <button
+                  onClick={() => setShowSuperAdmin(false)}
+                  className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 mb-4 -mt-1 transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back</span>
+                </button>
+              )}
+
               {/* Form */}
               <div className="space-y-4">
                 {/* Username */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                    Username
+                    {showSuperAdmin ? 'Username' : 'Username / ID'}
                   </label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -303,7 +285,7 @@ export default function Login({ onLogin }: LoginProps) {
                       onKeyPress={handleKeyPress}
                       autoFocus
                       className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-gray-900 focus:ring-2 focus:ring-gray-900/5 outline-none transition-all"
-                      placeholder="superadmin"
+                      placeholder={showSuperAdmin ? 'superadmin' : 'Enter username'}
                     />
                   </div>
                 </div>
@@ -316,22 +298,16 @@ export default function Login({ onLogin }: LoginProps) {
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input
-                      type={showPin ? 'text' : 'password'}
+                      type="password"
                       value={pin}
                       onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
                       onKeyPress={handleKeyPress}
                       maxLength={6}
-                      className="w-full pl-10 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-gray-900 focus:ring-2 focus:ring-gray-900/5 outline-none tracking-[0.25em] transition-all"
-                      placeholder="999999"
+                      className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-gray-900 focus:ring-2 focus:ring-gray-900/5 outline-none tracking-[0.25em] transition-all"
+                      placeholder="••••••"
                     />
-                    <button
-                      type="button"
-                      onClick={() => setShowPin(!showPin)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    >
-                      <Eye className="w-4 h-4" />
-                    </button>
                   </div>
+                  <p className="text-xs text-gray-400 mt-1">6-digit PIN</p>
                 </div>
 
                 {/* Error */}
@@ -354,7 +330,7 @@ export default function Login({ onLogin }: LoginProps) {
 
             {/* Footer */}
             <p className="text-center text-xs text-gray-400 mt-6">
-              Demo with sample data
+              Secure access
             </p>
           </div>
         </div>
